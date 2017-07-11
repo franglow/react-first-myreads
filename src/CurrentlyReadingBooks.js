@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 
-class ListBooks extends Component {	
+class CurrentlyReadingBooks extends Component {	
 	render() {
 		return(
 			<ol className="books-grid">
-			{this.props.books.map( book => 
+			{(this.props.books.filter((book) => ((book.shelf === 'currentlyReading')))).map( book => 
 			<li key={book.id}>
 			<div className="book">
 				<div className="book-top">
@@ -24,7 +24,6 @@ class ListBooks extends Component {
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors}</div>
-
             </div>
             </li>
             )}
@@ -32,4 +31,4 @@ class ListBooks extends Component {
 		)
 	}
 }
-export default ListBooks
+export default CurrentlyReadingBooks
