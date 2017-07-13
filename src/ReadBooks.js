@@ -1,6 +1,13 @@
 import React, {Component} from 'react'
 
 class ReadBooks extends Component {	
+    handleChange(e,book) {
+        const bookModified = this.props.books.filter((bookHisory) => ((bookHisory.id === book.id)))
+        {bookModified[0].shelf = e}
+        const booksUnmodified = this.props.books.filter((bookHisory) => ((bookHisory.id !== book.id)))
+        if (this.props.onChangeShelf) 
+            this.props.onChangeShelf(e,book,booksUnmodified.concat([ bookModified[0] ]))
+    }
 	render() {
 		return(
 			<ol className="books-grid">
@@ -9,11 +16,12 @@ class ReadBooks extends Component {
                 <div className="book">
                     <div className="book-top">
                         <div 
-                           className="book-cover" 
+                            className="book-cover" 
                             style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
                         </div>
                         <div className="book-shelf-changer">
-                            <select>
+                            <select value={book.shelf} 
+                                onChange={event => this.handleChange(event.target.value, book)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

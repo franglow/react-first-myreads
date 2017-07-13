@@ -23,7 +23,11 @@ class BooksApp extends React.Component {
     })
   }
 
-
+  updateShelf(shelf,book,newList) {
+    BooksAPI.update(book,shelf).then(book => {
+        this.setState({ books : newList })
+    })
+  }
 
   render() {
     return (
@@ -50,19 +54,33 @@ class BooksApp extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                    <CurrentlyReadingBooks books={this.state.books} />
+                    <CurrentlyReadingBooks 
+                      books={this.state.books} 
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                    <WantToReadBooks books={this.state.books} />
+                    <WantToReadBooks 
+                      books={this.state.books}
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                    <ReadBooks books={this.state.books} />
+                    <ReadBooks books={this.state.books} 
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
               </div>
