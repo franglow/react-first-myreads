@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import SearchResults from './SearchResults'
 import * as BooksAPI from './BooksAPI'
-// import sortBy from 'sort-by'
-// import escapeRegExp from 'escape-string-regexp'
 
 class SearchBooks extends Component {
   	state = {
@@ -18,7 +16,6 @@ class SearchBooks extends Component {
     	query : ''
   	}
 
-//Chekear este ejemplo de como manejar la consulta.
     updateQuery = (query) => {
     	this.setState({ query : query.trim() })
         if (this.state.query) {
@@ -33,20 +30,6 @@ class SearchBooks extends Component {
     clearQuery = () => {
 		this.setState({ query : ''})
 	}
-/*
-Couple things: 
-*1.* Before executing the search check that this.state.query 
-	is not an empty string. Empty string returns 403. 
-*2.* Anytime you have a setState followed by 
-	something that relies on the new state pass it in a function 
-	as the second arg to setState. setState is async, so that's 
-	the only way you can be sure state has been updated before 
-	the next line of code runs 
-*3.* `BooksApi.search()`  doesn't return the proper shelf. 
-	The rubric warns that you must fix the data. Loop through 
-	the returned books an ensure that they are the same if book 
-	is in books, else none.
-*/
 
 	updateShelf(shelf,book,newList) {
     	BooksAPI.update(book,shelf).then(book => {
