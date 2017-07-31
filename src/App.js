@@ -1,7 +1,12 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import ListBooks from './ListBooks'
+import CurrentlyReadingBooks from './CurrentlyReadingBooks'
+import ReadBooks from './ReadBooks'
+import WantToReadBooks from './WantToReadBooks'
+import SearchBooks from './SearchBooks'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -21,24 +26,18 @@ class BooksApp extends React.Component {
     })
   }
 
-
+  updateShelf(shelf,book,newList) {
+    BooksAPI.update(book,shelf).then(book => {
+        this.setState({ books : newList })
+    })
+  }
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author"/>
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
-        ) : (
+        <Route path="/search" component={SearchBooks} 
+        />
+        <Route exact path="/" render={ () => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -48,28 +47,44 @@ class BooksApp extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                    <ListBooks books={this.state.books} />
+                    <CurrentlyReadingBooks 
+                      books={this.state.books} 
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks books={this.state.books} />
+                    <WantToReadBooks 
+                      books={this.state.books}
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks books={this.state.books} />
+                    <ReadBooks books={this.state.books} 
+                      onChangeShelf={(shelf,book,newList) => {
+                        this.updateShelf(shelf,book,newList)
+                        }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link 
+                to="/search">Add a book</Link>
             </div>
           </div>
-        )}
+          ) } 
+        />
       </div>
     )
   }
