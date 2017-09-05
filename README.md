@@ -1,18 +1,34 @@
-# Deberria escribir un readme de este estilo!!! campion!.
-# Server for Contacts Project
+# A Book Tracking App
 
-This is a backend server for the Contacts app in-class project. This project is part of [Udacity's React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
+Allows you to select and categorize books you have read, are currently reading, or want to read
 
-You'll build the front end of the Contacts app throughout the course. Because the course is on React and doesn't cover Node or servers, we've built this server and an API to interact with it so can focus on building the front end portion of the project in React.
+## Getting Started
 
-## Getting Set Up
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Getting the server running on your local machine takes only a few steps:
+### Prerequisites
 
-1. clone the project - `git clone https://github.com/udacity/reactnd-contacts-server.git`
+If you want to add improvements just need to have a little knowledge of javascript and a many learning desires.
+
+### Installing
+
+1. clone the project - `git clone https://github.com/franglow/react-first-myreads.git`
 2. install its dependencies - `npm install`
-3. start the server - `node server.js`
+3. start the server - `npm start`
+4. a new browser tab will be open with the app running
 
-## Contributing
+## Running the tests
 
-We love receiving pull requests! For specifics on how to contribute to this project, check out the [contributing file](CONTRIBUTING.md).
+Not implemented yet.
+
+
+## Authors
+
+* **Udacity** - *Initial work* - [Udacity](https://www.udacity.com/)
+* **Fran Cortez**
+
+See also the list of [contributors](https://github.com/franglow/react-first-myreads/contributors) who participated in this project.
+
+## Acknowledgments
+
+* Udacity.
