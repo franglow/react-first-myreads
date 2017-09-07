@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class WantToReadBooks extends Component {
+class Book extends Component {	
     handleChange(e,book) {
         const bookModified = this.props.books.filter((bookHisory) => ((bookHisory.id === book.id)))
         {bookModified[0].shelf = e}
@@ -10,18 +10,15 @@ class WantToReadBooks extends Component {
     }
 	render() {
 		return(
-			<ol className="books-grid">
-			{(this.props.books.filter((book) => ((book.shelf === 'wantToRead')))).map( book => 
-			<li key={book.id}>
-        		<div className="book">
-        			<div className="book-top">
+                <div className="book">
+                    <div className="book-top">
                         <div 
-                        	className="book-cover" 
-                            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}>
+                            className="book-cover" 
+                            style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}>
                         </div>
                         <div className="book-shelf-changer">
-                            <select value={book.shelf} 
-                                onChange={event => this.handleChange(event.target.value, book)}>
+                            <select value={this.props.book.shelf} 
+                                onChange={event => this.handleChange(event.target.value, this.props.book)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -30,13 +27,10 @@ class WantToReadBooks extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors}</div>
+                    <div className="book-title">{this.props.book.title}</div>
+                    <div className="book-authors">{this.props.book.authors}</div>
                 </div>
-            </li>
-            )}
-            </ol>
 		)
 	}
 }
-export default WantToReadBooks
+export default Book
