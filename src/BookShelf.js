@@ -31,6 +31,7 @@ class BookShelf extends Component {
 							            <li key={book.id}>
                 				    <Book 
                 					    book={book}
+                					    books={this.state.books}
                       				onChangeShelf={(shelf,book,newList) => {
 	                        			this.updateShelf(shelf,book,newList)
                         			}}
@@ -48,6 +49,7 @@ class BookShelf extends Component {
 							         <li key={book.id}>
 								        <Book 
                 					book={book}
+                					books={this.state.books}
                       				onChangeShelf={(shelf,book,newList) => {
                         				this.updateShelf(shelf,book,newList)
                         			}}
@@ -65,6 +67,7 @@ class BookShelf extends Component {
             				  <li key={book.id}>
             					 <Book 
                 					book={book}
+                					books={this.state.books}
                       		onChangeShelf={(shelf,book,newList) => {
                         				this.updateShelf(shelf,book,newList)
                         			}}
