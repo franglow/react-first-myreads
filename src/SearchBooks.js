@@ -5,12 +5,6 @@ import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
   	state = {
-    	/**
-     	* TODO: Instead of using this state variable to keep track of which page
-     	* we're on, use the URL in the browser's address bar. This will ensure that
-     	* users can use the browser's back and forward buttons to navigate between
-     	* pages, as well as provide a good URL they can bookmark and share.
-    	 */
     	showSearchPage: false,
     	books: [],
     	query : ''
@@ -18,8 +12,8 @@ class SearchBooks extends Component {
 
     updateQuery = (query) => {
     	this.setState({ query : query.trim() })
-        if (this.state.query) {
-        	BooksAPI.search(this.state.query, 20).then((books) => {        		
+        if (query) {
+        	BooksAPI.search(query, 20).then((books) => {        		
 				if (this.state.books !== books) {
 					this.setState({books: books})
 				}
@@ -36,10 +30,8 @@ class SearchBooks extends Component {
         	this.setState({ books : newList })
     	})
   	}
-
 	render() {
 		const { query } = this.state.query
-
 		return(
 			<div className="search-books">
 		        <div className="search-books-bar">
@@ -60,6 +52,7 @@ class SearchBooks extends Component {
 		        <div className="search-books-results">
 		          	<SearchResults 
                       books={this.state.books} 
+                      querys={this.state.query} 
                       onChangeShelf={(shelf,book,newList) => {
                         this.updateShelf(shelf,book,newList)
                         }}
