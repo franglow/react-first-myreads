@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class SearchResults extends Component {	
@@ -9,6 +10,11 @@ class SearchResults extends Component {
         if (this.props.onChangeShelf)
             this.props.onChangeShelf(e,book,booksUnmodified.concat([ bookModified[0] ]))
     }
+    updateShelf(shelf,book,newList) {
+        BooksAPI.update(book,shelf).then(book => {
+            this.setState({ books : newList })
+        })
+    }
 	render() {
         if (this.props.querys && this.props.books.length) {
 
@@ -18,6 +24,7 @@ class SearchResults extends Component {
                     <li key={book.id}>
                         <Book 
                             book={book}
+                            books={this.props.books}
                             onChangeShelf={(shelf,book,newList) => {
                                 this.updateShelf(shelf,book,newList)
                             }}
